@@ -8,6 +8,20 @@ PLUGIN_DIR=$(dirname $0)
 . "$PLUGIN_DIR/lib/helpers"
 
 case "$1" in
+  logs:all)
+    shift 1
+    tail_logs all $@
+    ;;
+
+  logs:app)
+    shift 1
+    tail_logs app $@
+    ;;
+
+  logs:supervisord)
+    tail_logs all $2 $3 supervisor
+    ;;
+
   scale)
     [[ -z $2 ]] && echo "Please specify an app to scale" && exit 1
 
